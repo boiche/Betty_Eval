@@ -50,7 +50,10 @@
                         return true;
                     }
                 default:
-                    return false;
+                    {
+                        Console.WriteLine(string.Format(INVALID_COMMAND, CommandContext.RecentCommand.Name));
+                        return false;
+                    }
             }
         }
     }

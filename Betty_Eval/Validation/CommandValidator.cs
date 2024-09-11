@@ -36,18 +36,18 @@
                             Console.WriteLine(string.Format(INVALID_PARAM_COUNT, CommandContext.RecentCommand.Type, CommandContext.RecentCommand.Parameters.Length));
                             return false;
                         }
-                        if (!int.TryParse(CommandContext.RecentCommand.Parameters[0].ToString(), out int parameter))
+                        if (!decimal.TryParse(CommandContext.RecentCommand.Parameters[0].ToString(), out decimal parameter))
                         {
                             Console.WriteLine(INVALID_PARAM_VALUE);
                             return false;
                         }
-                        if (parameter < 1)
+                        if (parameter <= 0)
                         {
                             Console.WriteLine(INVALID_PARAM_VALUE);
                             return false;
                         }
 
-                        return int.TryParse(CommandContext.RecentCommand.Parameters[0].ToString(), out _);
+                        return true;
                     }
                 default:
                     return false;

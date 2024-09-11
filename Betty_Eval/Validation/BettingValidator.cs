@@ -5,7 +5,7 @@
     /// </summary>
     public class BettingValidator : IValidator
     {
-        private const string NO_FUNDS = "Insufficient funds. Please deposit. Current balance is {0}$";
+        private const string NO_FUNDS = "Insufficient funds. Please deposit. Current balance is {0:F2}$";
 
         public bool Validate()
         {

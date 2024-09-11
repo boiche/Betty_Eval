@@ -9,7 +9,7 @@ namespace Betty_Eval
     /// <param name="Name">Typed name of the command</param>
     /// <param name="Type">Registerd type of the command</param>
     /// <param name="Parameters">Collection of integers</param>
-    public record Command(string Name, CommandType Type, params int[] Parameters);
+    public record Command(string Name, CommandType Type, params decimal[] Parameters);
     public static class CommandContext
     {
         private static readonly Dictionary<CommandType, Delegate> _commands;
@@ -26,9 +26,9 @@ namespace Betty_Eval
             _commands = new Dictionary<CommandType, Delegate>()
             {
                 { CommandType.Exit, () => { GameEnvironment.Exit(); } },
-                { CommandType.Bet, (int amount) => { GameEnvironment.Play(amount); } },
-                { CommandType.Deposit, (int amount) => { GameEnvironment.Deposit(amount); } },
-                { CommandType.Withdraw, (int amount) => { GameEnvironment.Withdraw(amount); } }
+                { CommandType.Bet, (decimal amount) => { GameEnvironment.Play(amount); } },
+                { CommandType.Deposit, (decimal amount) => { GameEnvironment.Deposit(amount); } },
+                { CommandType.Withdraw, (decimal amount) => { GameEnvironment.Withdraw(amount); } }
             };
             _commandValidator = new CommandValidator();
             _recentCommand = new(string.Empty, CommandType.None, []);
@@ -69,7 +69,7 @@ namespace Betty_Eval
 
             return new(command[0], type, command[1..].Select(x =>
             {
-                int.TryParse(x, out int result);
+                decimal.TryParse(x, out decimal result);
                 return result;
             }).ToArray());
         }

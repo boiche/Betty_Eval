@@ -2,6 +2,11 @@
 {
     public class Player
     {
-        public static decimal Balance { get; set; }
+        private static decimal _balance = 0;
+        public static decimal Balance 
+        {
+            get => _balance; 
+            set => _balance = Math.Round(value, 2); 
+        }
     }
 }

@@ -8,8 +8,8 @@ namespace Betty_Eval.Games
     /// </summary>
     public abstract class SlotGame
     {
-        private const string LOSE = "No luck this time. Your balance is {0}$";
-        private const string WIN = "You won {0}$. Your balance is {1}$";
+        private const string LOSE = "No luck this time. Your balance is {0:F2}$";
+        private const string WIN = "You won {0:F2}$. Your balance is {1:F2}$";
 
         protected bool _configured;
         protected SlotGameConfiguration _configuration;
@@ -28,7 +28,7 @@ namespace Betty_Eval.Games
         /// Executes single run of the game
         /// </summary>
         /// <param name="bet">Amount to bet</param>
-        public virtual void Play(int bet)
+        public virtual void Play(decimal bet)
         {
             if (!_configured)
                 return;
@@ -59,7 +59,7 @@ namespace Betty_Eval.Games
                 {
                     if (result <= probability.Probability + previousProbability)
                     {
-                        int multiplier = random.Next((int)(probability.Low * 100), (int)(probability.High * 100));
+                        decimal multiplier = random.Next((int)(probability.Low * 100), (int)(probability.High * 100));
                         decimal reward = bet * multiplier / 100;
                         Player.Balance += reward;
                         Console.WriteLine(string.Format(WIN, reward, Player.Balance));

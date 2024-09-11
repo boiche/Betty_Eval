@@ -12,7 +12,7 @@
 
             if (CommandContext.RecentCommand.Parameters[0] > Player.Balance)
             {
-                Console.WriteLine($"Insufficient funds. Please deposit. Current balance is {Player.Balance}$");
+                Console.WriteLine($"Insufficient funds. Please deposit. Current balance is {Player.Balance:F2}$");
                 return false;
             }
 

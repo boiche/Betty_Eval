@@ -7,6 +7,9 @@ namespace Betty_Eval.Games
     /// </summary>
     public static class GameEnvironment
     {
+        private const string DEPOSIT_MESSAGE = "{0:F2}$ deposited successfully. Your balance is {1:F2}$";
+        private const string WITHDRAW_MESSAGE = "{0:F2}$ withdrawn successfully. Your balance is {1:F2}$";
+
         private static SlotGame? _loadedSlotGame;
         /// <summary>
         /// Is game terminated
@@ -27,7 +30,7 @@ namespace Betty_Eval.Games
         /// Starts the <see cref="SlotGame"/>
         /// </summary>
         /// <param name="bet">Amount to bet</param>
-        public static void Play(int bet)
+        public static void Play(decimal bet)
         {
             if (!new BettingValidator().Validate())
                 return;
@@ -48,23 +51,23 @@ namespace Betty_Eval.Games
         /// Deposits funds to the <see cref="Player"/>'s wallet
         /// </summary>
         /// <param name="amount">Amount to deposit</param>
-        internal static void Deposit(int amount)
+        public static void Deposit(decimal amount)
         {
             Player.Balance += amount;
-            Console.WriteLine($"{amount}$ deposited successfully. Your balance is {Player.Balance}$");
+            Console.WriteLine(string.Format(DEPOSIT_MESSAGE, amount, Player.Balance));
         }
 
         /// <summary>
         /// Withdraws funds from the <see cref="Player"/>'s wallet
         /// </summary>
         /// <param name="amount">Amount to withdraw</param>
-        internal static void Withdraw(int amount)
+        public static void Withdraw(decimal amount)
         {
             if (!new WithdrawValidator().Validate())
                 return;
 
             Player.Balance -= amount;
-            Console.WriteLine($"{amount}$ withdrawn successfully. Your balance is {Player.Balance}$");
+            Console.WriteLine(string.Format(WITHDRAW_MESSAGE, amount, Player.Balance));
         }
     }
 }
